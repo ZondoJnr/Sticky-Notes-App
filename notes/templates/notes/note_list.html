@@ -1,0 +1,22 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+<h2>All Sticky Notes</h2>
+
+{% if notes %}
+    <ul class="note-list">
+        {% for note in notes %}
+        <li class="note-card">
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.content|linebreaks }}</p>
+            <div class="note-actions">
+                <a href="{% url 'note_update' note.pk %}">Edit</a> |
+                <a href="{% url 'note_delete' note.pk %}">Delete</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No notes yet. <a href="{% url 'note_create' %}">Create one!</a></p>
+{% endif %}
+{% endblock %}
